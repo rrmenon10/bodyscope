@@ -9,10 +9,12 @@ def time_domain(audiopath):
 
     # Load the audio file (we get the wave form and the sampling rate as output)
     x , _ = librosa.load(audiopath)
-    
+
     # Plot waveform
     plt.figure()
-    librosa.display.waveshow(x, x_axis='s',)
+    librosa.display.waveshow(x, x_axis='s')
+    plt.ylabel('Amplitude')
+    plt.title('Time domain plot')
     plt.show()
 
 def spectrogram(audiopath):
@@ -20,7 +22,7 @@ def spectrogram(audiopath):
     # Load the audio file (we get the wave form and the sampling rate as output)
     x , _ = librosa.load(audiopath)
 
-    # Compute the fourier transform and convert amplitude spectrogram to dB spectrogram 
+    # Compute the fourier transform and convert amplitude spectrogram to dB spectrogram
     X = librosa.stft(x)
     Xdb = librosa.amplitude_to_db(abs(X), ref=np.max)
 
@@ -28,6 +30,7 @@ def spectrogram(audiopath):
     plt.figure()
     librosa.display.specshow(Xdb, y_axis='linear', x_axis='s')
     plt.colorbar()
+    plt.title('Spectrogram')
     plt.show()
 
 if __name__ == '__main__':
